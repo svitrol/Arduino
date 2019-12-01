@@ -1,0 +1,66 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Atmel Studio Solution File, Format Version 11.00
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "proRelatka", "proRelatka.cppproj", "{D0CBDD90-0667-4C53-BE27-933FB5158644}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "MalyArduinatkoRelatka", "..\MalyArduinatkoRelatka\MalyArduinatkoRelatka.cppproj", "{62B256E7-6C86-43CB-BDF4-E9818E47CB23}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "final_teplomer", "..\final_teplomer\final_teplomer.cppproj", "{86B05EB0-18FF-4DBB-AB54-1914F43A3964}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "klinickyPosluchac", "..\klinickyPosluchac\klinickyPosluchac.cppproj", "{F07DCACE-0C48-4954-9789-742F56FF299F}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "kamrator", "..\kamrator\kamrator.cppproj", "{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "casislavSDatem", "..\casislavSDatem\casislavSDatem.cppproj", "{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|AVR = Debug|AVR
+		Release|ARM = Release|ARM
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Debug|ARM.Build.0 = Debug|ARM
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Debug|AVR.ActiveCfg = Debug|ARM
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Release|ARM.ActiveCfg = Release|ARM
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Release|ARM.Build.0 = Release|ARM
+		{D0CBDD90-0667-4C53-BE27-933FB5158644}.Release|AVR.ActiveCfg = Release|ARM
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Debug|ARM.ActiveCfg = Debug|AVR
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Debug|AVR.ActiveCfg = Debug|AVR
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Debug|AVR.Build.0 = Debug|AVR
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Release|ARM.ActiveCfg = Release|AVR
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Release|AVR.ActiveCfg = Release|AVR
+		{62B256E7-6C86-43CB-BDF4-E9818E47CB23}.Release|AVR.Build.0 = Release|AVR
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Debug|ARM.ActiveCfg = Debug|ARM
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Debug|ARM.Build.0 = Debug|ARM
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Debug|AVR.ActiveCfg = Debug|ARM
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Release|ARM.ActiveCfg = Release|ARM
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Release|ARM.Build.0 = Release|ARM
+		{86B05EB0-18FF-4DBB-AB54-1914F43A3964}.Release|AVR.ActiveCfg = Release|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Debug|ARM.Build.0 = Debug|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Debug|AVR.ActiveCfg = Debug|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Release|ARM.ActiveCfg = Release|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Release|ARM.Build.0 = Release|ARM
+		{F07DCACE-0C48-4954-9789-742F56FF299F}.Release|AVR.ActiveCfg = Release|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Debug|ARM.ActiveCfg = Debug|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Debug|ARM.Build.0 = Debug|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Debug|AVR.ActiveCfg = Debug|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Release|ARM.ActiveCfg = Release|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Release|ARM.Build.0 = Release|ARM
+		{D7DDBEE2-D09D-4EA4-B6B3-936731482E97}.Release|AVR.ActiveCfg = Release|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Debug|ARM.Build.0 = Debug|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Debug|AVR.ActiveCfg = Debug|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Release|ARM.ActiveCfg = Release|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Release|ARM.Build.0 = Release|ARM
+		{8351D536-577F-4B22-B9E8-DB8F3EC5BE0A}.Release|AVR.ActiveCfg = Release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
