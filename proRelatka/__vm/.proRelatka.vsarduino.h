@@ -35,7 +35,7 @@ void podminka(const char* odkaz);
 void podminka(const char* odkaz, bool jakyBylStav);
 bool preberSiKonstanty( const char* cisloProPrevod,float &vysledek);
 cas preberSiCasaky(char* cisloProPrevod);
-void vykonajFejnovyPrikaz(char* prikaz);
+void vykonajFejnovyPrikaz(char* pole);
 void zpracujVysledek();
 void preberSiTo(char pole[mixim_delka_lajny],byte kteryKokot);
 void postarejSeOTo(uint8_t icko, const char* odkaz, char skoncil, bool jakToDopadlo);

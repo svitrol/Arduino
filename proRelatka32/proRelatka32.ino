@@ -15,9 +15,9 @@
 #define maxPocetPodminek 20
 
 #include "cas.h"
-//#include <Ticker.h>
+#include <Ticker.h>
 #include <NTPClient.h>
-#include "ESP8266WiFi.h"
+#include "WiFi.h"
 #include <WiFiUdp.h>
 #include "EEPROM.h"
 #include <MySQL_Connection.h>
@@ -26,7 +26,7 @@
 
 #define LED 2
 
-
+Ticker blinker;
 template<typename T>
 bool rozhodovacka(const char* podminka,T prvniCastPodminky,T druhaCastPodminky);
 template<typename T>
@@ -74,7 +74,7 @@ cas systemak;
 
 WiFiClient *clients[Maximu_clientu] = { NULL };
 char inputs[Maximu_clientu][mixim_delka_lajny] = { 0 };
-	
+  
 WiFiClient senzory[maxPocetSenzoru];
 byte pocetAktivnichCteni = 0;
 float cekovanyHodnyto[maxPocetSenzoru][2];
@@ -105,18 +105,18 @@ void setup() {
 
 
 void loop() {
-	//Serial.println("A");
-	if (updatniMiCas) {
-		if (WiFi.status() == WL_CONNECTED) {
-			timeClient.update();
-			systemak.hodiny = timeClient.getHours();
-			systemak.minuty = timeClient.getMinutes();
-			systemak.sekundy = timeClient.getSeconds();
-			Serial.printf("#cas je updatnuty: %d:%d:%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy);
-		}
-		updatniMiCas=false;
-	}
-	//Serial.println("B");
+  //Serial.println("A");
+  if (updatniMiCas) {
+    if (WiFi.status() == WL_CONNECTED) {
+      timeClient.update();
+      systemak.hodiny = timeClient.getHours();
+      systemak.minuty = timeClient.getMinutes();
+      systemak.sekundy = timeClient.getSeconds();
+      Serial.printf("#cas je updatnuty: %d:%d:%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy);
+    }
+    updatniMiCas=false;
+  }
+  //Serial.println("B");
   praceSklienty();
   //Serial.println("C");
   if (uprava == 1) {
@@ -139,14 +139,14 @@ void loop() {
  // Serial.println("F");
   if (millis() - ctiUchazece >= 1000) {
     ctiUchazece = millis();
-	  rutiny();
-	  
+    rutiny();
+    
   }
   if (millis() - proChazejPodminky >= 1000) {
     proChazejPodminky = millis();
-	   //Serial.println("F");
-	  projdiSiPodminky();	  
-	  //Serial.println("G");
+     //Serial.println("F");
+    projdiSiPodminky();   
+    //Serial.println("G");
   }
   //Serial.println("G");
   if (necekane) {
@@ -159,9 +159,9 @@ void loop() {
   }
   //Serial.println("I");
   if (zmanaCoBySeMelaUkazatNaMobilechaDalsichZarizenich) {
-    zmanaCoBySeMelaUkazatNaMobilechaDalsichZarizenich = false;	
+    zmanaCoBySeMelaUkazatNaMobilechaDalsichZarizenich = false;  
     zmanaRvi();
-	kromkdoToPoslal = 255;
+  kromkdoToPoslal = 255;
   }
   //Serial.println("J");
   if (poslirelecka) {
@@ -176,7 +176,7 @@ void loop() {
     Serial.print(posledniZparava);
     cekamNaOdpoved = true;
     poslirelecka = 0;
-	  zmanaCoBySeMelaUkazatNaMobilechaDalsichZarizenich=true;    
+    zmanaCoBySeMelaUkazatNaMobilechaDalsichZarizenich=true;    
   }
 
 
@@ -187,547 +187,547 @@ void loop() {
 //tvar zadani S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v01>20?R1:0-R1:1;t00>0?R1:1-R1:0}
 //tvar na cas St{0:0:0 08.11.2019?R1:0-R1:1;v/t/v:t>0?R1:1-R1:0;}
 //tvar na cas St{0:0:0-02:0:0?R1:0-R1:1;v/t/v:t>0?R1:1-R1:0;}
-	
+  
 void rutiny(){
-	bool pribylNovaHodnota;
-	for (byte i = 0 ; i < pocetAktivnichCteni ; ++i) {
-		if (senzory[i].connected()) {
-			if (senzory[i].available() > 0) {
-				byte n = senzory[i].available();
-				char hodnoty[12];
-				byte poziceNecisla=255;
-				for (byte ij = 0; ij < n; ij++) {
-					hodnoty[ij] = senzory[i].read();
-					if(hodnoty[ij]<'0'||hodnoty[ij]>9){
-						poziceNecisla=ij;
-					}
-				}
-				if (inputs[i][n - 2] == 13 || inputs[i][n - 2] == 10) inputs[i][n - 2] = '\0';
-				if (inputs[i][n - 1] == 13 || inputs[i][n - 1] == 10) inputs[i][n - 1] = '\0';
-				//Serial.println(hodnoty);
-				if(poziceNecisla==255){
-					cekovanyHodnyto[i][0]=atof(hodnoty);
-				}
-				else{
-					hodnoty[poziceNecisla]='\0';
-					const char* ukazNaPrvni=hodnoty;
-					const char* ukazNaDruhy=&hodnoty[poziceNecisla+1];
-					cekovanyHodnyto[i][0]=atof(ukazNaPrvni);
-					cekovanyHodnyto[i][1]=atof(ukazNaDruhy);					
-				}
-				mamTamHodnotu[i]=true;
-				//Serial.printf("%f.%f",cekovanyHodnyto[i][0],cekovanyHodnyto[i][1]);
-			}
-			else mamTamHodnotu[i]=false;
-		}
-	}
+  bool pribylNovaHodnota;
+  for (byte i = 0 ; i < pocetAktivnichCteni ; ++i) {
+    if (senzory[i].connected()) {
+      if (senzory[i].available() > 0) {
+        byte n = senzory[i].available();
+        char hodnoty[12];
+        byte poziceNecisla=255;
+        for (byte ij = 0; ij < n; ij++) {
+          hodnoty[ij] = senzory[i].read();
+          if(hodnoty[ij]<'0'||hodnoty[ij]>9){
+            poziceNecisla=ij;
+          }
+        }
+        if (inputs[i][n - 2] == 13 || inputs[i][n - 2] == 10) inputs[i][n - 2] = '\0';
+        if (inputs[i][n - 1] == 13 || inputs[i][n - 1] == 10) inputs[i][n - 1] = '\0';
+        //Serial.println(hodnoty);
+        if(poziceNecisla==255){
+          cekovanyHodnyto[i][0]=atof(hodnoty);
+        }
+        else{
+          hodnoty[poziceNecisla]='\0';
+          const char* ukazNaPrvni=hodnoty;
+          const char* ukazNaDruhy=&hodnoty[poziceNecisla+1];
+          cekovanyHodnyto[i][0]=atof(ukazNaPrvni);
+          cekovanyHodnyto[i][1]=atof(ukazNaDruhy);          
+        }
+        mamTamHodnotu[i]=true;
+        //Serial.printf("%f.%f",cekovanyHodnyto[i][0],cekovanyHodnyto[i][1]);
+      }
+      else mamTamHodnotu[i]=false;
+    }
+  }
 }
 byte aktivniPodminaka=0;
 void projdiSiPodminky(){
-	for (aktivniPodminaka = 0; aktivniPodminaka< pocetPodminek; aktivniPodminaka++) {
-		if(vztazeneCasyKpodminkam[aktivniPodminaka][0]!=0){
-			if(millis()-vztazeneCasyKpodminkam[aktivniPodminaka][1]>=vztazeneCasyKpodminkam[aktivniPodminaka][0]){
-				vztazeneCasyKpodminkam[aktivniPodminaka][0]=0;
-				vztazeneCasyKpodminkam[aktivniPodminaka][1]=0;
-				podminka(podminky[aktivniPodminaka]);
-			}
-		}
-		else podminka(podminky[aktivniPodminaka]);
-	}
+  for (aktivniPodminaka = 0; aktivniPodminaka< pocetPodminek; aktivniPodminaka++) {
+    if(vztazeneCasyKpodminkam[aktivniPodminaka][0]!=0){
+      if(millis()-vztazeneCasyKpodminkam[aktivniPodminaka][1]>=vztazeneCasyKpodminkam[aktivniPodminaka][0]){
+        vztazeneCasyKpodminkam[aktivniPodminaka][0]=0;
+        vztazeneCasyKpodminkam[aktivniPodminaka][1]=0;
+        podminka(podminky[aktivniPodminaka]);
+      }
+    }
+    else podminka(podminky[aktivniPodminaka]);
+  }
 }
 void podminka(const char* odkaz) {
-	char podminka[3];
-	uint8_t icko = 0;
-	char skoncil;
-	char prvniCastPodminky[20];
-	char druhaCastPodminky[20];
-	uint8_t pocatek;
+  char podminka[3];
+  uint8_t icko = 0;
+  char skoncil;
+  char prvniCastPodminky[20];
+  char druhaCastPodminky[20];
+  uint8_t pocatek;
 
-	for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
-		prvniCastPodminky[icko - pocatek] = odkaz[icko];
-	}
-	prvniCastPodminky[icko - pocatek] = '\0';
-	podminka[0] = odkaz[icko];
-	if (odkaz[++icko] == '=') {
-		podminka[1] = odkaz[icko++];
-		podminka[2] = '\0';
-	}
-	else {
-		podminka[1] = '\0';
-	}
-	for (pocatek = icko; odkaz[icko] != '?' && odkaz[icko] != '&' && odkaz[icko] != '|'; icko++) {
-		druhaCastPodminky[icko - pocatek] = odkaz[icko];
-	}
-	druhaCastPodminky[icko - pocatek] = '\0';
-	skoncil = odkaz[icko];
-	//icko++;
-	bool a = false;
-	if (prvniCastPodminky[0] == 't' || prvniCastPodminky[0] == 'c') {
-		cas casak1 = preberSiCasaky(prvniCastPodminky);
-		cas casak2 = preberSiCasaky(druhaCastPodminky);
-		a = rozhodovacka(podminka, casak1, casak2);
-		printf(" %d:%d:%d %d.%d.%d %s %d:%d:%d %d.%d.%d  dopadlo: %d\n",  casak1.sekundy, casak1.minuty, casak1.hodiny, casak1.dny, casak1.mesice, casak1.roky, podminka, casak2.sekundy, casak2.minuty, casak2.hodiny, casak2.dny, casak2.mesice, casak2.roky,a);
-	}
-	else {
-		float cislo1,cislo2;
-		if(preberSiKonstanty(prvniCastPodminky,cislo1)){
-			if(preberSiKonstanty(druhaCastPodminky,cislo2)){
-				a = rozhodovacka(podminka, cislo1, cislo2);
-			}
-			else return;
-		}
-		else return;
-		
-		printf("%f %s %f  dopadlo: %d\n",  cislo1, podminka, cislo2,a);
-	}
-	postarejSeOTo(icko, odkaz, skoncil, a);
+  for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
+    prvniCastPodminky[icko - pocatek] = odkaz[icko];
+  }
+  prvniCastPodminky[icko - pocatek] = '\0';
+  podminka[0] = odkaz[icko];
+  if (odkaz[++icko] == '=') {
+    podminka[1] = odkaz[icko++];
+    podminka[2] = '\0';
+  }
+  else {
+    podminka[1] = '\0';
+  }
+  for (pocatek = icko; odkaz[icko] != '?' && odkaz[icko] != '&' && odkaz[icko] != '|'; icko++) {
+    druhaCastPodminky[icko - pocatek] = odkaz[icko];
+  }
+  druhaCastPodminky[icko - pocatek] = '\0';
+  skoncil = odkaz[icko];
+  //icko++;
+  bool a = false;
+  if (prvniCastPodminky[0] == 't' || prvniCastPodminky[0] == 'c') {
+    cas casak1 = preberSiCasaky(prvniCastPodminky);
+    cas casak2 = preberSiCasaky(druhaCastPodminky);
+    a = rozhodovacka(podminka, casak1, casak2);
+    printf(" %d:%d:%d %d.%d.%d %s %d:%d:%d %d.%d.%d  dopadlo: %d\n",  casak1.sekundy, casak1.minuty, casak1.hodiny, casak1.dny, casak1.mesice, casak1.roky, podminka, casak2.sekundy, casak2.minuty, casak2.hodiny, casak2.dny, casak2.mesice, casak2.roky,a);
+  }
+  else {
+    float cislo1,cislo2;
+    if(preberSiKonstanty(prvniCastPodminky,cislo1)){
+      if(preberSiKonstanty(druhaCastPodminky,cislo2)){
+        a = rozhodovacka(podminka, cislo1, cislo2);
+      }
+      else return;
+    }
+    else return;
+    
+    printf("%f %s %f  dopadlo: %d\n",  cislo1, podminka, cislo2,a);
+  }
+  postarejSeOTo(icko, odkaz, skoncil, a);
 }
 void podminka(const char* odkaz, bool jakyBylStav) {
-	char podminka[3];
-	uint8_t icko = 0;
-	char zacatek = odkaz[icko++];
-	char skoncil;
-	char prvniCastPodminky[20];
-	char druhaCastPodminky[20];
-	uint8_t pocatek;
+  char podminka[3];
+  uint8_t icko = 0;
+  char zacatek = odkaz[icko++];
+  char skoncil;
+  char prvniCastPodminky[20];
+  char druhaCastPodminky[20];
+  uint8_t pocatek;
 
-	for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
-		prvniCastPodminky[icko - pocatek] = odkaz[icko];
-	}
-	prvniCastPodminky[icko - pocatek] = '\0';
-	podminka[0] = odkaz[icko];
-	if (odkaz[++icko] == '=') {
-		podminka[1] = odkaz[icko++];
-		podminka[2] = '\0';
-	}
-	else {
-		podminka[1] = '\0';
-	}
-	for (pocatek = icko; odkaz[icko] != '?' && odkaz[icko] != '&' && odkaz[icko] != '|'; icko++) {
-		druhaCastPodminky[icko - pocatek] = odkaz[icko];
-	}
-	druhaCastPodminky[icko - pocatek] = '\0';
-	skoncil = odkaz[icko];
-	//icko++;
+  for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
+    prvniCastPodminky[icko - pocatek] = odkaz[icko];
+  }
+  prvniCastPodminky[icko - pocatek] = '\0';
+  podminka[0] = odkaz[icko];
+  if (odkaz[++icko] == '=') {
+    podminka[1] = odkaz[icko++];
+    podminka[2] = '\0';
+  }
+  else {
+    podminka[1] = '\0';
+  }
+  for (pocatek = icko; odkaz[icko] != '?' && odkaz[icko] != '&' && odkaz[icko] != '|'; icko++) {
+    druhaCastPodminky[icko - pocatek] = odkaz[icko];
+  }
+  druhaCastPodminky[icko - pocatek] = '\0';
+  skoncil = odkaz[icko];
+  //icko++;
 
-	bool a = false;
-	if (prvniCastPodminky[0] == 't' || prvniCastPodminky[0] == 'c') {
-		cas casak1 = preberSiCasaky(prvniCastPodminky);
-		cas casak2 = preberSiCasaky(druhaCastPodminky);
-		a = rozhodovacka(jakyBylStav, zacatek, podminka, casak1, casak2);
-		printf("%d%c %d:%d:%d %d.%d.%d %s %d:%d:%d %d.%d.%d dopadlo: %d\n", jakyBylStav, zacatek, casak1.sekundy, casak1.minuty, casak1.hodiny, casak1.dny, casak1.mesice, casak1.roky, podminka, casak2.sekundy, casak2.minuty, casak2.hodiny, casak2.dny, casak2.mesice, casak2.roky, a);
-	}
-	else {
-		float cislo1,cislo2;
-		if(preberSiKonstanty(prvniCastPodminky,cislo1)){
-			if(preberSiKonstanty(druhaCastPodminky,cislo2)){
-				a = rozhodovacka(jakyBylStav, zacatek, podminka, cislo1, cislo2);			
-			}
-			else return;
-		}
-		else return;
-		
-		printf("%d%c %f %s %f dopadlo: %d\n", jakyBylStav, zacatek, cislo1, podminka, cislo2, a);
-	}
-	postarejSeOTo(icko, odkaz, skoncil, a);
+  bool a = false;
+  if (prvniCastPodminky[0] == 't' || prvniCastPodminky[0] == 'c') {
+    cas casak1 = preberSiCasaky(prvniCastPodminky);
+    cas casak2 = preberSiCasaky(druhaCastPodminky);
+    a = rozhodovacka(jakyBylStav, zacatek, podminka, casak1, casak2);
+    printf("%d%c %d:%d:%d %d.%d.%d %s %d:%d:%d %d.%d.%d dopadlo: %d\n", jakyBylStav, zacatek, casak1.sekundy, casak1.minuty, casak1.hodiny, casak1.dny, casak1.mesice, casak1.roky, podminka, casak2.sekundy, casak2.minuty, casak2.hodiny, casak2.dny, casak2.mesice, casak2.roky, a);
+  }
+  else {
+    float cislo1,cislo2;
+    if(preberSiKonstanty(prvniCastPodminky,cislo1)){
+      if(preberSiKonstanty(druhaCastPodminky,cislo2)){
+        a = rozhodovacka(jakyBylStav, zacatek, podminka, cislo1, cislo2);     
+      }
+      else return;
+    }
+    else return;
+    
+    printf("%d%c %f %s %f dopadlo: %d\n", jakyBylStav, zacatek, cislo1, podminka, cislo2, a);
+  }
+  postarejSeOTo(icko, odkaz, skoncil, a);
 }
 
 bool preberSiKonstanty( const char* cisloProPrevod,float &vysledek) {
-	vysledek = 0;
-	bool bylaHodnota=false;
-	if (cisloProPrevod[0] < '0' || cisloProPrevod[0]>'9'&&cisloProPrevod[0]!='-') {
-		if (cisloProPrevod[0] == 'R') {
-			vysledek = relatka[cisloProPrevod[1] - 48 - 1];
-			bylaHodnota=true;
-		}
-		else {
-			if(mamTamHodnotu[cisloProPrevod[1] - 48]){
-				vysledek = cekovanyHodnyto[cisloProPrevod[1] - 48][cisloProPrevod[2] - 48];
-				bylaHodnota=true;
-			}
-			
-		}
-	}
-	else {
-		vysledek = atof(cisloProPrevod);
-		bylaHodnota=true;
-	}
-	return bylaHodnota;
+  vysledek = 0;
+  bool bylaHodnota=false;
+  if (cisloProPrevod[0] < '0' || cisloProPrevod[0]>'9'&&cisloProPrevod[0]!='-') {
+    if (cisloProPrevod[0] == 'R') {
+      vysledek = relatka[cisloProPrevod[1] - 48 - 1];
+      bylaHodnota=true;
+    }
+    else {
+      if(mamTamHodnotu[cisloProPrevod[1] - 48]){
+        vysledek = cekovanyHodnyto[cisloProPrevod[1] - 48][cisloProPrevod[2] - 48];
+        bylaHodnota=true;
+      }
+      
+    }
+  }
+  else {
+    vysledek = atof(cisloProPrevod);
+    bylaHodnota=true;
+  }
+  return bylaHodnota;
 }
 cas preberSiCasaky(char* cisloProPrevod) {
-	cas vysledek;
-	if (cisloProPrevod[0] == 'c') {
-		const char* poleslav[6];;
-		uint8_t pocet=1;
-		poleslav[0] = &cisloProPrevod[1];
-		for (uint8_t i = 0; cisloProPrevod[i] != '\0';i++) {
-			if (cisloProPrevod[i] == '-' || cisloProPrevod[i] == ':' || cisloProPrevod[i] == '.') {
-				char* zmana = &cisloProPrevod[i++];
-				*zmana= '\0';
+  cas vysledek;
+  if (cisloProPrevod[0] == 'c') {
+    const char* poleslav[6];;
+    uint8_t pocet=1;
+    poleslav[0] = &cisloProPrevod[1];
+    for (uint8_t i = 0; cisloProPrevod[i] != '\0';i++) {
+      if (cisloProPrevod[i] == '-' || cisloProPrevod[i] == ':' || cisloProPrevod[i] == '.') {
+        char* zmana = &cisloProPrevod[i++];
+        *zmana= '\0';
 
-				poleslav[pocet++]=&cisloProPrevod[i];
-			}
-		}
-		if (pocet == 3) {
-			vysledek.sekundy = atoi(poleslav[0]);
-			vysledek.minuty = atoi(poleslav[1]);
-			vysledek.hodiny = atoi(poleslav[2]);
-		}
-		else {
+        poleslav[pocet++]=&cisloProPrevod[i];
+      }
+    }
+    if (pocet == 3) {
+      vysledek.sekundy = atoi(poleslav[0]);
+      vysledek.minuty = atoi(poleslav[1]);
+      vysledek.hodiny = atoi(poleslav[2]);
+    }
+    else {
 
-			vysledek.sekundy = atoi(poleslav[0]);
-			vysledek.minuty = atoi(poleslav[1]);
-			vysledek.hodiny = atoi(poleslav[2]);
-			vysledek.dny = atoi(poleslav[3]);
-			vysledek.mesice = atoi(poleslav[4]);
-			vysledek.roky = atoi(poleslav[5]);
-		}
-	}
-	else {
-		vysledek = systemak;
-	}
-	return vysledek;
+      vysledek.sekundy = atoi(poleslav[0]);
+      vysledek.minuty = atoi(poleslav[1]);
+      vysledek.hodiny = atoi(poleslav[2]);
+      vysledek.dny = atoi(poleslav[3]);
+      vysledek.mesice = atoi(poleslav[4]);
+      vysledek.roky = atoi(poleslav[5]);
+    }
+  }
+  else {
+    vysledek = systemak;
+  }
+  return vysledek;
 }
 void vykonajFejnovyPrikaz(char* pole){
-	Serial.println(pole);
+  Serial.println(pole);
     if (pole[0] == 'R') {
-		switch (pole[1] - 48) {//formát zprávy Rx:0/1:1/x/c
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8: {
-				byte akce = 0;
-				if (pole[3] == '1') { //formát zprávy Rx:0/1
-					akce = 1;
-					//Serial.printf("ano zapnu ti ho %s",pole);
-				}
-				if (akce != relatka[pole[1] - 48 - 1]) {
-					relatka[pole[1] - 48 - 1] = akce;
-					uprava = 1;
-					poslirelecka = 1;
-				}
-				break;
-			}
-			case 40: {
-				bool bylaZmena = 0;
-				if (pole[3] == '1') {		 //RX:0/1
-					for (byte pohoda = 0; pohoda < 8; pohoda++) {
-						if (relatka[pohoda] != 1) {
-							relatka[pohoda] = 1;
-							bylaZmena = 1;
-						}
-					}
-				}
-				if (pole[3] == '0') {
-					for (byte pohoda = 0; pohoda < 8; pohoda++) {
-						if (relatka[pohoda] != 0) {
-							relatka[pohoda] = 0;
-							bylaZmena = 1;
-						}
-					}
-				}
-				if (bylaZmena) {
-					uprava = 1;
-					poslirelecka = 1;
-				}
-				break;
-			}
-		}//R8:0:c
-		if(pole[5]=='1'){
-			podminky[aktivniPodminaka]=podminky[--pocetPodminek];
-		}
-		else if(pole[5]=='c'){
-			float cislo=0;
-			if(preberSiKonstanty(&pole[6],cislo)){
-				vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
-				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;	
-			}
-		}
+    switch (pole[1] - 48) {//formát zprávy Rx:0/1:1/x/c
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8: {
+        byte akce = 0;
+        if (pole[3] == '1') { //formát zprávy Rx:0/1
+          akce = 1;
+          //Serial.printf("ano zapnu ti ho %s",pole);
+        }
+        if (akce != relatka[pole[1] - 48 - 1]) {
+          relatka[pole[1] - 48 - 1] = akce;
+          uprava = 1;
+          poslirelecka = 1;
+        }
+        break;
+      }
+      case 40: {
+        bool bylaZmena = 0;
+        if (pole[3] == '1') {    //RX:0/1
+          for (byte pohoda = 0; pohoda < 8; pohoda++) {
+            if (relatka[pohoda] != 1) {
+              relatka[pohoda] = 1;
+              bylaZmena = 1;
+            }
+          }
+        }
+        if (pole[3] == '0') {
+          for (byte pohoda = 0; pohoda < 8; pohoda++) {
+            if (relatka[pohoda] != 0) {
+              relatka[pohoda] = 0;
+              bylaZmena = 1;
+            }
+          }
+        }
+        if (bylaZmena) {
+          uprava = 1;
+          poslirelecka = 1;
+        }
+        break;
+      }
+    }//R8:0:c
+    if(pole[5]=='1'){
+      podminky[aktivniPodminaka]=podminky[--pocetPodminek];
     }
-	else if(pole[0] == 'P'){//P0101XX00:1
-		bool propiseSe=false;
-		for(uint8_t i=1;pole[i]!='\0';i++){
-			if(pole[i]!='X'){
-				if(relatka[i-1]!=pole[i]-48){
-					relatka[i-1]=pole[i]-48;
-					propiseSe=true;
-				}
-				
-			}			
-		}
-		uprava = propiseSe;
-		poslirelecka = propiseSe;
-		if(pole[10]=='1'){
-			podminky[aktivniPodminaka]=podminky[--pocetPodminek];
-		}
-		else  if(pole[10]=='c'){
-			float cislo=0;
-			if(preberSiKonstanty(&pole[6],cislo)){
-				vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
-				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;
-			}
-		}		
-	}
-	//zpracujPozadavek(prikaz,0);	
+    else if(pole[5]=='c'){
+      float cislo=0;
+      if(preberSiKonstanty(&pole[6],cislo)){
+        vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
+        vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo; 
+      }
+    }
+    }
+  else if(pole[0] == 'P'){//P0101XX00:1
+    bool propiseSe=false;
+    for(uint8_t i=1;pole[i]!='\0';i++){
+      if(pole[i]!='X'){
+        if(relatka[i-1]!=pole[i]-48){
+          relatka[i-1]=pole[i]-48;
+          propiseSe=true;
+        }
+        
+      }     
+    }
+    uprava = propiseSe;
+    poslirelecka = propiseSe;
+    if(pole[10]=='1'){
+      podminky[aktivniPodminaka]=podminky[--pocetPodminek];
+    }
+    else  if(pole[10]=='c'){
+      float cislo=0;
+      if(preberSiKonstanty(&pole[6],cislo)){
+        vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
+        vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;
+      }
+    }   
+  }
+  //zpracujPozadavek(prikaz,0); 
  }
 void zpracujVysledek(){
-	if (vysledek[0] == 'S') {
-		uint16_t icko;
-		if (vysledek[1] != 't') {
-			icko = 0;
-			uint8_t pocetPrikaziva = 0;
-			while (vysledek[icko] != '{') {
-				char ipina[16];
-				int portakovaporta = 0;
-				char porta[6];
-				//char prikaz[6];
-				uint16_t pocatek;
+  if (vysledek[0] == 'S') {
+    uint16_t icko;
+    if (vysledek[1] != 't') {
+      icko = 0;
+      uint8_t pocetPrikaziva = 0;
+      while (vysledek[icko] != '{') {
+        char ipina[16];
+        int portakovaporta = 0;
+        char porta[6];
+        //char prikaz[6];
+        uint16_t pocatek;
 
-				for (pocatek = ++icko; vysledek[icko] != ':'; icko++) {
-					ipina[icko - pocatek] = vysledek[icko];
-				}
-				ipina[icko - pocatek] = '\0';
-				vysledek[icko] = '\0';
-				for (pocatek = ++icko; vysledek[icko] != '['; icko++) {
-					porta[icko - pocatek] = vysledek[icko];
-				}
-				porta[icko - pocatek] = '\0';
-				prikazy[pocetPrikaziva++] = &vysledek[icko + 1];
-				vysledek[icko] = '\0';
-				for (pocatek = ++icko; vysledek[icko] != ']'; icko++) {
-					//prikaz[icko - pocatek] = vysledek[icko];
-				}
-				//prikaz[icko - pocatek] = '\0';
-				vysledek[icko] = '\0';
-				//vysledek[++icko] = '\0';
-				icko++;
-				if (senzory[pocetAktivnichCteni].connect(ipina, atoi(porta))) {					
-					senzory[pocetAktivnichCteni].printf("%s\n",prikazy[pocetPrikaziva-1]);
-					Serial.printf("Pripojil jsem sa k :%s.%s a pozil jsem %s\n ",ipina,porta,prikazy[pocetPrikaziva-1]);
-					pocetAktivnichCteni++;
-				}
-				else{
-					Serial.print("Ten tvuj senzor nejak nejede\n");
-				}
-				if(vysledek[icko]==';')vysledek[icko] = '\0';
-			}
-		}
-		else {
-			icko = 2;
-		}
-		podminky[pocetPodminek++] = &vysledek[icko + 1];
-		for (uint8_t i = icko; i < 200; i++) {
-			if (vysledek[i] == ';') {
-				vysledek[i] = '\0';
-				podminky[pocetPodminek++] = &vysledek[i + 1];
-			}
-		}
-		/*projed podminky
-		for (uint8_t i = 0; i < pocetPodminek; i++) {
-			podminka(podminky[i]);
-		}*/
-		muzuJedPodminky=true;
-	}
+        for (pocatek = ++icko; vysledek[icko] != ':'; icko++) {
+          ipina[icko - pocatek] = vysledek[icko];
+        }
+        ipina[icko - pocatek] = '\0';
+        vysledek[icko] = '\0';
+        for (pocatek = ++icko; vysledek[icko] != '['; icko++) {
+          porta[icko - pocatek] = vysledek[icko];
+        }
+        porta[icko - pocatek] = '\0';
+        prikazy[pocetPrikaziva++] = &vysledek[icko + 1];
+        vysledek[icko] = '\0';
+        for (pocatek = ++icko; vysledek[icko] != ']'; icko++) {
+          //prikaz[icko - pocatek] = vysledek[icko];
+        }
+        //prikaz[icko - pocatek] = '\0';
+        vysledek[icko] = '\0';
+        //vysledek[++icko] = '\0';
+        icko++;
+        if (senzory[pocetAktivnichCteni].connect(ipina, atoi(porta))) {         
+          senzory[pocetAktivnichCteni].printf("%s\n",prikazy[pocetPrikaziva-1]);
+          Serial.printf("Pripojil jsem sa k :%s.%s a pozil jsem %s\n ",ipina,porta,prikazy[pocetPrikaziva-1]);
+          pocetAktivnichCteni++;
+        }
+        else{
+          Serial.print("Ten tvuj senzor nejak nejede\n");
+        }
+        if(vysledek[icko]==';')vysledek[icko] = '\0';
+      }
+    }
+    else {
+      icko = 2;
+    }
+    podminky[pocetPodminek++] = &vysledek[icko + 1];
+    for (uint8_t i = icko; i < 200; i++) {
+      if (vysledek[i] == ';') {
+        vysledek[i] = '\0';
+        podminky[pocetPodminek++] = &vysledek[i + 1];
+      }
+    }
+    /*projed podminky
+    for (uint8_t i = 0; i < pocetPodminek; i++) {
+      podminka(podminky[i]);
+    }*/
+    muzuJedPodminky=true;
+  }
 }
 void preberSiTo(char pole[mixim_delka_lajny],byte kteryKokot){
-	//char pole[200];
-	const char* prikazy[8];
-	//S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v>2?R1:0-R1:1;t>0?R1:1-R1:0}
-	//S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v01>2&v00>3&v01<3?R1:0-R1:1;t>0?R1:1-R1:0}
-	//S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v00>20?R1:0-R1:1;v10>0?R1:1-R1:0;c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
-	//St{c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
-	if (pole[0] == 'S') {
-		if (pole[1] != 'p') {
-			bool bylaUkonceni=false;
-			mentalniVelikostpodminke=0;
-			while(pole[mentalniVelikostpodminke]!='\0'){
-				vysledek[mentalniVelikostpodminke]=pole[mentalniVelikostpodminke];
-				if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
-				mentalniVelikostpodminke++;
-			}
-			if(bylaUkonceni){
-				zpracujVysledek();
-			}
-		}
-		else{
-			uint16_t pocatek=mentalniVelikostpodminke-2;
-			bool bylaUkonceni=false;
-			while(pole[mentalniVelikostpodminke]!='\0'){
-				vysledek[mentalniVelikostpodminke]=pole[mentalniVelikostpodminke-pocatek];
-				if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
-					mentalniVelikostpodminke++;
-			}
-			if(bylaUkonceni){
-				zpracujVysledek();
-			}
-		}
-	}
+  //char pole[200];
+  const char* prikazy[8];
+  //S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v>2?R1:0-R1:1;t>0?R1:1-R1:0}
+  //S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v01>2&v00>3&v01<3?R1:0-R1:1;t>0?R1:1-R1:0}
+  //S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v00>20?R1:0-R1:1;v10>0?R1:1-R1:0;c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
+  //St{c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
+  if (pole[0] == 'S') {
+    if (pole[1] != 'p') {
+      bool bylaUkonceni=false;
+      mentalniVelikostpodminke=0;
+      while(pole[mentalniVelikostpodminke]!='\0'){
+        vysledek[mentalniVelikostpodminke]=pole[mentalniVelikostpodminke];
+        if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
+        mentalniVelikostpodminke++;
+      }
+      if(bylaUkonceni){
+        zpracujVysledek();
+      }
+    }
+    else{
+      uint16_t pocatek=mentalniVelikostpodminke-2;
+      bool bylaUkonceni=false;
+      while(pole[mentalniVelikostpodminke]!='\0'){
+        vysledek[mentalniVelikostpodminke]=pole[mentalniVelikostpodminke-pocatek];
+        if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
+          mentalniVelikostpodminke++;
+      }
+      if(bylaUkonceni){
+        zpracujVysledek();
+      }
+    }
+  }
 }
 void postarejSeOTo(uint8_t icko, const char* odkaz, char skoncil, bool jakToDopadlo) {
-	uint8_t pocatek;
-	if (jakToDopadlo) {
-		if (skoncil != '?') {
-			podminka(&odkaz[icko], true);
-		}
-		else {
-			char prikaz[50];
-			for (pocatek = ++icko; odkaz[icko] != '-'; icko++) {
-				prikaz[icko-pocatek]=odkaz[icko];
-			}
-			prikaz[icko-pocatek]='\0';
-			vykonajFejnovyPrikaz(prikaz);
-		}
-	}
-	else if (skoncil != '?') {
-		podminka(&odkaz[icko], false);
-	}
-	else {
-		char prikaz[50];
-		for (pocatek = icko; odkaz[icko] != '-'; icko++);
-		for (pocatek = ++icko; odkaz[icko] != '\0' && odkaz[icko] != '}'; icko++) {
-			prikaz[icko-pocatek]=odkaz[icko];
-		}
-		prikaz[icko-pocatek]='\0';
-		vykonajFejnovyPrikaz(prikaz);
-	
+  uint8_t pocatek;
+  if (jakToDopadlo) {
+    if (skoncil != '?') {
+      podminka(&odkaz[icko], true);
+    }
+    else {
+      char prikaz[50];
+      for (pocatek = ++icko; odkaz[icko] != '-'; icko++) {
+        prikaz[icko-pocatek]=odkaz[icko];
+      }
+      prikaz[icko-pocatek]='\0';
+      vykonajFejnovyPrikaz(prikaz);
+    }
+  }
+  else if (skoncil != '?') {
+    podminka(&odkaz[icko], false);
+  }
+  else {
+    char prikaz[50];
+    for (pocatek = icko; odkaz[icko] != '-'; icko++);
+    for (pocatek = ++icko; odkaz[icko] != '\0' && odkaz[icko] != '}'; icko++) {
+      prikaz[icko-pocatek]=odkaz[icko];
+    }
+    prikaz[icko-pocatek]='\0';
+    vykonajFejnovyPrikaz(prikaz);
+  
 }}
 template<typename T>
 bool rozhodovacka(const char* podminka,T prvniCastPodminky,T druhaCastPodminky) {
-	bool a = false;
-	switch (podminka[0]) {
-		case '<': {
-			if (podminka[1] == '=') {
-				a = prvniCastPodminky <= druhaCastPodminky;
-			}
-			else {
-				a = prvniCastPodminky < druhaCastPodminky;
-			}
-			break;
-		}
-		case '>': {
-			if (podminka[1] == '=') {
-				a = prvniCastPodminky >= druhaCastPodminky;
-			}
-			else {
-				a = prvniCastPodminky > druhaCastPodminky;
-			}
-			break;
+  bool a = false;
+  switch (podminka[0]) {
+    case '<': {
+      if (podminka[1] == '=') {
+        a = prvniCastPodminky <= druhaCastPodminky;
+      }
+      else {
+        a = prvniCastPodminky < druhaCastPodminky;
+      }
+      break;
+    }
+    case '>': {
+      if (podminka[1] == '=') {
+        a = prvniCastPodminky >= druhaCastPodminky;
+      }
+      else {
+        a = prvniCastPodminky > druhaCastPodminky;
+      }
+      break;
 
-		}
-		case '=': {
-			a = prvniCastPodminky == druhaCastPodminky;
-			break;
+    }
+    case '=': {
+      a = prvniCastPodminky == druhaCastPodminky;
+      break;
 
-		}
-		case '!': {
-			a = prvniCastPodminky != druhaCastPodminky;
+    }
+    case '!': {
+      a = prvniCastPodminky != druhaCastPodminky;
 
-			break;
-		}
-	}
-	return a;
+      break;
+    }
+  }
+  return a;
 }
 template<typename T>
 bool rozhodovacka(bool jakyBylStav,char zacatek, const char* podminka, T prvniCastPodminky, T druhaCastPodminky) {
-	bool a = false;
-	if (zacatek == '|') {
+  bool a = false;
+  if (zacatek == '|') {
 
-		switch (podminka[0]) {
-			case '<': {
-				if (podminka[1] == '=') {
-					a = jakyBylStav || prvniCastPodminky <= druhaCastPodminky;
-				}
-				else {
-					a = jakyBylStav || prvniCastPodminky < druhaCastPodminky;
-				}
-				break;
-			}
-			case '>': {
-				if (podminka[1] == '=') {
-					a = jakyBylStav || prvniCastPodminky >= druhaCastPodminky;
-				}
-				else {
-					a = jakyBylStav || prvniCastPodminky > druhaCastPodminky;
-				}
-				break;
+    switch (podminka[0]) {
+      case '<': {
+        if (podminka[1] == '=') {
+          a = jakyBylStav || prvniCastPodminky <= druhaCastPodminky;
+        }
+        else {
+          a = jakyBylStav || prvniCastPodminky < druhaCastPodminky;
+        }
+        break;
+      }
+      case '>': {
+        if (podminka[1] == '=') {
+          a = jakyBylStav || prvniCastPodminky >= druhaCastPodminky;
+        }
+        else {
+          a = jakyBylStav || prvniCastPodminky > druhaCastPodminky;
+        }
+        break;
 
-			}
-			case '=': {
-				a = jakyBylStav || prvniCastPodminky == druhaCastPodminky;
-				break;
+      }
+      case '=': {
+        a = jakyBylStav || prvniCastPodminky == druhaCastPodminky;
+        break;
 
-			}
-			case '!': {
-				a = jakyBylStav || prvniCastPodminky != druhaCastPodminky;
+      }
+      case '!': {
+        a = jakyBylStav || prvniCastPodminky != druhaCastPodminky;
 
-				break;
-			}
-		}
-	}
-	else {
-		switch (podminka[0]) {
-			case '<': {
-				if (podminka[1] == '=') {
-					a = jakyBylStav && prvniCastPodminky <= druhaCastPodminky;
-				}
-				else {
-					a = jakyBylStav && prvniCastPodminky < druhaCastPodminky;
-				}
-				break;
-			}
-			case '>': {
-				if (podminka[1] == '=') {
-					a = jakyBylStav && prvniCastPodminky >= druhaCastPodminky;
-				}
-				else {
-					a = jakyBylStav && prvniCastPodminky > druhaCastPodminky;
-				}
-				break;
+        break;
+      }
+    }
+  }
+  else {
+    switch (podminka[0]) {
+      case '<': {
+        if (podminka[1] == '=') {
+          a = jakyBylStav && prvniCastPodminky <= druhaCastPodminky;
+        }
+        else {
+          a = jakyBylStav && prvniCastPodminky < druhaCastPodminky;
+        }
+        break;
+      }
+      case '>': {
+        if (podminka[1] == '=') {
+          a = jakyBylStav && prvniCastPodminky >= druhaCastPodminky;
+        }
+        else {
+          a = jakyBylStav && prvniCastPodminky > druhaCastPodminky;
+        }
+        break;
 
-			}
-			case '=': {
-				a = jakyBylStav && prvniCastPodminky == druhaCastPodminky;
-				break;
+      }
+      case '=': {
+        a = jakyBylStav && prvniCastPodminky == druhaCastPodminky;
+        break;
 
-			}
-			case '!': {
-				a = jakyBylStav && prvniCastPodminky != druhaCastPodminky;
+      }
+      case '!': {
+        a = jakyBylStav && prvniCastPodminky != druhaCastPodminky;
 
-				break;
-			}
-		}
-	}
-	return a;
+        break;
+      }
+    }
+  }
+  return a;
 }
 
 //**********************************************************************************************************************************
 //zjistovani casu
 //**********************************************************************************************************************************
 
-void ICACHE_RAM_ATTR onTimerISR()  {//pocitadlo_hodin()
-	//Serial.printf("#cas je: %d:%d:%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy);
+void pocitadlo_hodin(){//ICACHE_RAM_ATTR onTimerISR()  {//pocitadlo_hodin()
+  //Serial.printf("#cas je: %d:%d:%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy);
   digitalWrite(LED,!(digitalRead(LED)));
   if (++systemak.sekundy >= 60) {
     systemak.sekundy = 0;
     if (++systemak.minuty >= 60) {
-		updatniMiCas=true;
+    updatniMiCas=true;
       systemak.minuty = 0;
       if (++systemak.hodiny >= 24) {
         systemak.hodiny = 0;
       }
     }
-	
+  
   }
 }
 //**********************************************************************************************************************************
 //zjistovani z maluho arduina
 //**********************************************************************************************************************************
 void provokace(char pole[], byte n) {
-  if (cekamNaOdpoved)	{
+  if (cekamNaOdpoved) {
     if (pole[0] == 'y') {
       cekamNaOdpoved = 0;
       //posliToCely();
@@ -856,7 +856,7 @@ void ctiDb() {
   }
   // Deleting the cursor also frees up memory used
   delete cur_mem;
-  //conn.close();
+  conn.close();
  // nakladac.flush();
   // Show the result
   //Serial.printf("#R1: %d,R2: %d,R3: %d,R4: %d,R5: %d,R6: %d,R7: %d,R8: %d\n",stavy[0],stavy[1],stavy[2],stavy[3],stavy[4],stavy[5],stavy[6],stavy[7]);
@@ -894,7 +894,7 @@ void updatniTo() {
   cur_mem->execute(query);
   delete cur_mem;
   Serial.println("#Data recorded.");
-  //conn.close();
+  conn.close();
   //nakladac.flush();
 }
 void zalozTabulku() {
@@ -920,7 +920,7 @@ void zalozTabulku() {
   }
   else
     Serial.println("#Connection failed.");
-  //conn.close();
+  conn.close();
   //nakladac.flush();
 }
 //**********************************************************************************************************************************
@@ -1027,7 +1027,7 @@ void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
         }
       case 40: {
           bool bylaZmena = 0;
-          if (pole[3] == '1') {		 //RX:0/1
+          if (pole[3] == '1') {    //RX:0/1
             for (byte pohoda = 0; pohoda < 8; pohoda++) {
               if (relatka[pohoda] != 1) {
                 relatka[pohoda] = 1;
@@ -1064,7 +1064,7 @@ void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
     }
   }
   else if(pole[0] == 'S'){
-	  preberSiTo(pole,kteryKokot);	  
+    preberSiTo(pole,kteryKokot);    
   }
 }
 //tvar zadani S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v/t/v:t>20?R1:0-R1:1;v/t/v:t>0?R1:1-R1:0;}
@@ -1074,9 +1074,10 @@ void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
 //prvni kofigurace pro pripojeni
 //**********************************************************************************************************************************
 void konfigurace_init() {
-    timer1_attachInterrupt(onTimerISR);
+    /*timer1_attachInterrupt(onTimerISR);
     timer1_enable(TIM_DIV16, TIM_EDGE, TIM_LOOP);
     timer1_write(5000000); //1 000 000 us
+    */
   Serial.begin(115200);
   if (nactiUdaje() == 1) {
     pripojSa();
@@ -1106,7 +1107,7 @@ void konfigurace_init() {
     systemak.minuty = 0;
     systemak.sekundy = 0;
   }
-  //blinker.attach(1, pocitadlo_hodin);
+  blinker.attach(1, pocitadlo_hodin);
   updatniMiCas=false;
   mentalniVelikostpodminke=0;
   pocetKlientu = 0;
