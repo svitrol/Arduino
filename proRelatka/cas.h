@@ -1,3 +1,5 @@
+#ifndef moje_fajnovaCasova_trida
+#define moje_fajnovaCasova_trida
 class cas {
 	public:
 	int8_t sekundy, minuty, hodiny, dny, mesice;
@@ -237,3 +239,4 @@ class cas {
 		}
 	}
 };
+#endif

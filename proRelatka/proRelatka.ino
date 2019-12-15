@@ -86,7 +86,7 @@ const char* podminky[maxPocetPodminek];
 int pocetPodminek = 0;
 unsigned int vztazeneCasyKpodminkam[maxPocetPodminek][2]={{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
 
-unsigned int casek, ctiSeriak,ctiUchazece,cticas,proChazejPodminky;
+unsigned int casek, ctiSeriak,ctiUchazece,cticas;
 int pocetKlientu = 0;
 byte bylJsemVdB = 0;
 
@@ -109,10 +109,8 @@ void loop() {
 	if (updatniMiCas) {
 		if (WiFi.status() == WL_CONNECTED) {
 			timeClient.update();
-			systemak.hodiny = timeClient.getHours();
-			systemak.minuty = timeClient.getMinutes();
-			systemak.sekundy = timeClient.getSeconds();
-			Serial.printf("#cas je updatnuty: %d:%d:%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy);
+			systemak=timeClient.dejMiCas_DoTeFajnTridy();
+			Serial.printf("#cas je updatnuty: %d:%d:%d %d.%d.%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy,systemak.dny,systemak.mesice,systemak.roky);
 		}
 		updatniMiCas=false;
 	}
@@ -126,10 +124,10 @@ void loop() {
   
   if (millis() - casek >= 1000) {
     casek = millis();
-    Serial.println("D");
+    //Serial.println("D");
     //Serial.println("#Kontrola");
       zmeniloSeDb();    
-    Serial.println("E");
+    //Serial.println("E");
   }
   
   if (millis() - ctiSeriak >= 500) {
@@ -142,12 +140,7 @@ void loop() {
 	  rutiny();
 	  
   }
-  if (millis() - proChazejPodminky >= 1000) {
-    proChazejPodminky = millis();
-	   //Serial.println("F");
-	  projdiSiPodminky();	  
-	  //Serial.println("G");
-  }
+  projdiSiPodminky();
   //Serial.println("G");
   if (necekane) {
     tohleNecekali();
@@ -216,7 +209,7 @@ void rutiny(){
 					cekovanyHodnyto[i][1]=atof(ukazNaDruhy);					
 				}
 				mamTamHodnotu[i]=true;
-				//Serial.printf("%f.%f",cekovanyHodnyto[i][0],cekovanyHodnyto[i][1]);
+				//Serial.printf("#%f.%f\n",cekovanyHodnyto[i][0],cekovanyHodnyto[i][1]);
 			}
 			else mamTamHodnotu[i]=false;
 		}
@@ -274,9 +267,15 @@ void podminka(const char* odkaz) {
 			if(preberSiKonstanty(druhaCastPodminky,cislo2)){
 				a = rozhodovacka(podminka, cislo1, cislo2);
 			}
-			else return;
+			else {
+        //printf("#cislo2 Ma problem\n");
+			  return;
+			}
 		}
-		else return;
+		else {
+      //printf("#cislo1 Ma problem\n");
+		  return;
+		}
 		
 		printf("%f %s %f  dopadlo: %d\n",  cislo1, podminka, cislo2,a);
 	}
@@ -444,7 +443,8 @@ void vykonajFejnovyPrikaz(char* pole){
 			float cislo=0;
 			if(preberSiKonstanty(&pole[6],cislo)){
 				vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
-				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;	
+				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;
+				Serial.printf("podminka bude odlozena o: %d\n",(int)cislo);	
 			}
 		}
     }
@@ -469,6 +469,7 @@ void vykonajFejnovyPrikaz(char* pole){
 			if(preberSiKonstanty(&pole[6],cislo)){
 				vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
 				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;
+				Serial.printf("podminka bude odlozena o: %d\n",(int)cislo);
 			}
 		}		
 	}
@@ -1091,21 +1092,19 @@ void konfigurace_init() {
   casek = millis();
   ctiSeriak = millis();
   ctiUchazece=millis();
-  proChazejPodminky=millis();
   bylJsemVdB = 0;
   uprava = 0;
   if (WiFi.status() == WL_CONNECTED) {
     zalozTabulku();
     timeClient.update();
-    systemak.hodiny = timeClient.getHours();
-    systemak.minuty = timeClient.getMinutes();
-    systemak.sekundy = timeClient.getSeconds();
+	systemak=timeClient.dejMiCas_DoTeFajnTridy();
   }
   else{
     systemak.hodiny = 0;
     systemak.minuty = 0;
     systemak.sekundy = 0;
   }
+  Serial.printf("#cas je updatnuty: %d:%d:%d %d.%d.%d\n",systemak.hodiny,systemak.minuty,systemak.sekundy,systemak.dny,systemak.mesice,systemak.roky);
   //blinker.attach(1, pocitadlo_hodin);
   updatniMiCas=false;
   mentalniVelikostpodminke=0;

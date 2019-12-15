@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Arduino.h"
-
+#include "cas.h"
 
 #include <Udp.h>
 
@@ -66,6 +66,7 @@ class NTPClient {
     int getHours();
     int getMinutes();
     int getSeconds();
+	cas dejMiCas_DoTeFajnTridy(unsigned long secs=0);
 
     /**
      * Changes the time offset. Useful for changing timezones dynamically
