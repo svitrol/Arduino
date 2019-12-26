@@ -11,6 +11,7 @@
 #define Maximu_clientu 10
 #define mixim_delka_lajny 50
 #define maxim_delkaPoleNaPodminky 1000
+#define delkaUdajuZakldaniKonfigurace 206
 #define maxPocetSenzoru 8
 #define maxPocetPodminek 20
 
@@ -36,7 +37,7 @@ WiFiServer wifiServer(8888);
 const char* udaje[pocetUdaju];
 char blaznivyNapad [pocetUdaju][32];
 byte stavKomunikace = 0;
-byte velikostEpromky = 206;//32 jmeno zarizeni 32 jmeno wifi 32 heslo wifi + 3 pokazde velikost pred obsahem promene  plus novinka 32 jmeno db 32 jmeno 32 heslo +4 ip serveru + 4 na port takze celk velikost 6*33 +4+4
+uint16_t velikostEpromky = delkaUdajuZakldaniKonfigurace+maxim_delkaPoleNaPodminky;//32 jmeno zarizeni 32 jmeno wifi 32 heslo wifi + 3 pokazde velikost pred obsahem promene  plus novinka 32 jmeno db 32 jmeno 32 heslo +4 ip serveru + 4 na port takze celk velikost 6*33 +4+4
 const char* necekanaZprava = "budik";
 byte necekane = 0;
 volatile byte relatka[PocetRelecek] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -80,7 +81,7 @@ byte pocetAktivnichCteni = 0;
 float cekovanyHodnyto[maxPocetSenzoru][2];
 bool mamTamHodnotu[maxPocetSenzoru]={false,false,false,false,false,false,false,false};
 char vysledek[maxim_delkaPoleNaPodminky];
-uint16_t mentalniVelikostpodminke=0;
+volatile uint16_t mentalniVelikostpodminke=0;
 const char* prikazy[maxPocetSenzoru];
 const char* podminky[maxPocetPodminek];
 int pocetPodminek = 0;
@@ -99,6 +100,10 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", UTCposun);
 void setup() {
 
   konfigurace_init();
+  if(nactiVysledekzEepromky()){
+	  Serial.println(vysledek);
+	  zpracujVysledek();
+  }
 
 }
 
@@ -180,7 +185,45 @@ void loop() {
 //tvar zadani S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v01>20?R1:0-R1:1;t00>0?R1:1-R1:0}
 //tvar na cas St{0:0:0 08.11.2019?R1:0-R1:1;v/t/v:t>0?R1:1-R1:0;}
 //tvar na cas St{0:0:0-02:0:0?R1:0-R1:1;v/t/v:t>0?R1:1-R1:0;}
-	
+void zapisMiVysledekDoEepromky(){
+	EEPROM.begin(velikostEpromky);
+	//fajne Zcane na konci udaju
+	for (uint16_t i = delkaUdajuZakldaniKonfigurace; i < velikostEpromky; i++) {
+		EEPROM.write(i, vysledek[i-delkaUdajuZakldaniKonfigurace]);
+	}
+	EEPROM.end();
+}	
+void vymazMIStarou(){
+	EEPROM.begin(velikostEpromky);
+	//nahazi to do nul
+	for (uint16_t i = delkaUdajuZakldaniKonfigurace; i < velikostEpromky; i++) {
+		EEPROM.write(i, '\0');
+	}
+	EEPROM.end();
+}
+const char* vysledekNormalniTvar(){
+	char pole[maxim_delkaPoleNaPodminky];
+	EEPROM.begin(velikostEpromky);
+	//fajne Zcane na konci udaju
+	pole[0]=EEPROM.read(delkaUdajuZakldaniKonfigurace);
+	for (uint16_t i = delkaUdajuZakldaniKonfigurace+1; i < velikostEpromky&&pole[i-delkaUdajuZakldaniKonfigurace-1]!='\0'; i++) {
+		pole[i-delkaUdajuZakldaniKonfigurace]=EEPROM.read(i);
+	}
+	EEPROM.end();
+	return pole;	
+}
+bool nactiVysledekzEepromky(){
+	EEPROM.begin(velikostEpromky);
+	//fajne Zcane na konci udaju
+	vysledek[0]=EEPROM.read(delkaUdajuZakldaniKonfigurace);
+	for (uint16_t i = delkaUdajuZakldaniKonfigurace+1; i < velikostEpromky&&vysledek[i-delkaUdajuZakldaniKonfigurace-1]!='\0'; i++) {
+		vysledek[i-delkaUdajuZakldaniKonfigurace]=EEPROM.read(i);
+	}
+	EEPROM.end();
+	bool byla=false;
+	if(vysledek[0]=='S')byla=true;
+	return byla;
+}
 void rutiny(){
 	bool pribylNovaHodnota;
 	for (byte i = 0 ; i < pocetAktivnichCteni ; ++i) {
@@ -210,9 +253,41 @@ void rutiny(){
 				}
 				mamTamHodnotu[i]=true;
 				//Serial.printf("#%f.%f\n",cekovanyHodnyto[i][0],cekovanyHodnyto[i][1]);
-			}
-			else mamTamHodnotu[i]=false;
+			}			
 		}
+		else mamTamHodnotu[i]=false;
+	}
+
+}
+void podmikny_init(){
+	pocetAktivnichCteni = 0;
+	pocetPodminek=0;
+	mentalniVelikostpodminke=0;
+	muzuJedPodminky=false;
+	/*
+	WiFiClient senzory[maxPocetSenzoru];
+	byte pocetAktivnichCteni = 0;
+	float cekovanyHodnyto[maxPocetSenzoru][2];
+	bool mamTamHodnotu[maxPocetSenzoru]={false,false,false,false,false,false,false,false};
+	char vysledek[maxim_delkaPoleNaPodminky];
+	volatile uint16_t mentalniVelikostpodminke=0;
+	const char* prikazy[maxPocetSenzoru];
+	const char* podminky[maxPocetPodminek];
+	int pocetPodminek = 0;
+	unsigned int vztazeneCasyKpodminkam[maxPocetPodminek][2]={{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}};
+	
+	*/
+	for(uint8_t i=0;i<maxPocetSenzoru;i++){
+		cekovanyHodnyto[i][0]=0;
+		cekovanyHodnyto[i][1]=0;
+		mamTamHodnotu[i]=false;	
+	}
+	for(uint8_t i=0;i<maxPocetPodminek;i++){
+		vztazeneCasyKpodminkam[i][0]=0;
+		vztazeneCasyKpodminkam[i][1]=0;
+	}
+	for(uint16_t i=0;i<maxim_delkaPoleNaPodminky;i++){
+		vysledek[i]='\0';
 	}
 }
 byte aktivniPodminaka=0;
@@ -542,7 +617,14 @@ void preberSiTo(char pole[mixim_delka_lajny],byte kteryKokot){
 	//S192.168.1.100:8888[v:t];192.168.1.114:8888[p];192.168.1.117:8888[s]{v00>20?R1:0-R1:1;v10>0?R1:1-R1:0;c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
 	//St{c00:00:00-1.12.2019=t?R1:0:x00:00:00-R1:1:1}
 	if (pole[0] == 'S') {
-		if (pole[1] != 'p') {
+		muzuJedPodminky=false;
+		if(pole[1] == '?'){
+			clients[kteryKokot]->printf("%s\n",vysledekNormalniTvar());
+			//Serial.printf("%s\n",vysledekNormalniTvar());
+		}
+		else if (pole[1] != 'P') {
+			Serial.println("#init");
+			podmikny_init();
 			bool bylaUkonceni=false;
 			mentalniVelikostpodminke=0;
 			while(pole[mentalniVelikostpodminke]!='\0'){
@@ -550,19 +632,35 @@ void preberSiTo(char pole[mixim_delka_lajny],byte kteryKokot){
 				if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
 				mentalniVelikostpodminke++;
 			}
+			for(int i=0;i<maxim_delkaPoleNaPodminky;i++)Serial.print(vysledek[i]);
+			Serial.println();
+			clients[kteryKokot]->write("ok\n");
 			if(bylaUkonceni){
+				Serial.println("#mazu");
+				vymazMIStarou();
+				Serial.println("#zapisuju");
+				zapisMiVysledekDoEepromky();
+				Serial.println("#zpracovavam");
 				zpracujVysledek();
 			}
 		}
 		else{
 			uint16_t pocatek=mentalniVelikostpodminke-2;
 			bool bylaUkonceni=false;
-			while(pole[mentalniVelikostpodminke]!='\0'){
+			while(pole[mentalniVelikostpodminke-pocatek]!='\0'){
 				vysledek[mentalniVelikostpodminke]=pole[mentalniVelikostpodminke-pocatek];
 				if(vysledek[mentalniVelikostpodminke]=='}')bylaUkonceni=true;
 					mentalniVelikostpodminke++;
 			}
+			for(int i=0;i<maxim_delkaPoleNaPodminky;i++)Serial.print(vysledek[i]);
+			Serial.println();
+			clients[kteryKokot]->write("ok\n");
 			if(bylaUkonceni){
+				Serial.println("#mazu");
+				vymazMIStarou();
+				Serial.println("#zapisuju");
+				zapisMiVysledekDoEepromky();
+				Serial.println("#zpracovavam");
 				zpracujVysledek();
 			}
 		}
@@ -1115,7 +1213,7 @@ void konfigurace_init() {
 void vycistiEepromku() {
   EEPROM.begin(velikostEpromky);
   // vycisti eepromku
-  for (byte i = 0; i < velikostEpromky; i++) {
+  for (uint16_t i = 0; i < velikostEpromky; i++) {
     EEPROM.write(i, '\0');
   }
   EEPROM.end();
@@ -1153,8 +1251,8 @@ byte nactiUdaje() {
 }
 void prosteToPrecti() {
   EEPROM.begin(velikostEpromky);
-  for (byte i = 0; i < velikostEpromky; i++) {
-    Serial.printf("#%d. %c", i, char(EEPROM.read(i)));
+  for (uint16_t i = 0; i < velikostEpromky; i++) {
+    Serial.printf("#%d. %c\n", i, char(EEPROM.read(i)));
   }
   EEPROM.end();
 }
@@ -1198,7 +1296,7 @@ void zapisDataDoEpromky(byte kdeJsmeVzapisu, byte n) {
     }
   }
   else  {
-    byte posuv = velikostEpromky - 8;
+    byte posuv = velikostEpromky -maxim_delkaPoleNaPodminky- 8;
     for (byte i = 0; i < n; i++) {
       EEPROM.write(i + posuv, dbAdresa[i]);
     }
@@ -1208,7 +1306,7 @@ void zapisDataDoEpromky(byte kdeJsmeVzapisu, byte n) {
 void zapisDataDoEpromky(int portak) {
   //Serial.println(portak);
   EEPROM.begin(velikostEpromky);
-  byte posuv = velikostEpromky - 4;
+  byte posuv = velikostEpromky-maxim_delkaPoleNaPodminky - 4;
   for (byte i = 0; i < 4 && portak > 0; i++) {
     EEPROM.write(i + posuv, portak % 256);
     portak = portak / 256;

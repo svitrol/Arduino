@@ -29,7 +29,12 @@
 #define FLASHMODE_DIO
 //
 //
+void zapisMiVysledekDoEepromky();
+void vymazMIStarou();
+const char* vysledekNormalniTvar();
+bool nactiVysledekzEepromky();
 void rutiny();
+void podmikny_init();
 void projdiSiPodminky();
 void podminka(const char* odkaz);
 void podminka(const char* odkaz, bool jakyBylStav);
