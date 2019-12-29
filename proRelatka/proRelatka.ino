@@ -1,5 +1,5 @@
-//dodělat fejnový příkaz
-//a ulozeni vysledneho makra do eepromky
+//možná by se hodila funkce pro validaci makra
+//smaž nepotřebné výpisy co by mátly arduinatko
 
 #define jmeno 0
 #define wifi 1
@@ -307,8 +307,8 @@ void podminka(const char* odkaz) {
 	char podminka[3];
 	uint8_t icko = 0;
 	char skoncil;
-	char prvniCastPodminky[20];
-	char druhaCastPodminky[20];
+	char prvniCastPodminky[21];
+	char druhaCastPodminky[21];
 	uint8_t pocatek;
 
 	for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
@@ -361,8 +361,8 @@ void podminka(const char* odkaz, bool jakyBylStav) {
 	uint8_t icko = 0;
 	char zacatek = odkaz[icko++];
 	char skoncil;
-	char prvniCastPodminky[20];
-	char druhaCastPodminky[20];
+	char prvniCastPodminky[21];
+	char druhaCastPodminky[21];
 	uint8_t pocatek;
 
 	for (pocatek = icko; odkaz[icko] != '<'&& odkaz[icko] != '>' && odkaz[icko] != '=' && odkaz[icko] != '!'; icko++) {
@@ -525,7 +525,7 @@ void vykonajFejnovyPrikaz(char* pole){
     }
 	else if(pole[0] == 'P'){//P0101XX00:1
 		bool propiseSe=false;
-		for(uint8_t i=1;pole[i]!='\0';i++){
+		for(uint8_t i=1;pole[i]!=':';i++){
 			if(pole[i]!='X'){
 				if(relatka[i-1]!=pole[i]-48){
 					relatka[i-1]=pole[i]-48;
@@ -541,7 +541,7 @@ void vykonajFejnovyPrikaz(char* pole){
 		}
 		else  if(pole[10]=='c'){
 			float cislo=0;
-			if(preberSiKonstanty(&pole[6],cislo)){
+			if(preberSiKonstanty(&pole[11],cislo)){
 				vztazeneCasyKpodminkam[aktivniPodminaka][1]=millis();
 				vztazeneCasyKpodminkam[aktivniPodminaka][0]=(int)cislo;
 				Serial.printf("podminka bude odlozena o: %d\n",(int)cislo);

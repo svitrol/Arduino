@@ -53,6 +53,7 @@
     <ListValues>
       <Value>__ESP8266_ESp8266__</Value>
       <Value>__ESP8266_ESP8266__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=80000000L</Value>
@@ -77,7 +78,7 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7</Value>
-      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src</Value>
+      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries</Value>
@@ -88,9 +89,8 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include</Value>
-      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include</Value>
+      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include</Value>
@@ -105,6 +105,7 @@
     <ListValues>
       <Value>__ESP8266_ESp8266__</Value>
       <Value>__ESP8266_ESP8266__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=80000000L</Value>
@@ -129,7 +130,7 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7</Value>
-      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src</Value>
+      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries</Value>
@@ -140,9 +141,8 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include</Value>
-      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include</Value>
+      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include</Value>
@@ -177,7 +177,12 @@
   <armgcccpp.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcccpp.preprocessingassembler.debugging.DebugLevel>
 </ArmGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../final_teplomer;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/ESP8266WiFi/src;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker;C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/avr;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/libb64;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/spiffs;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/d1_mini;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include;{build.path}/core;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/lib/gcc/xtensa-lx106-elf/4.8.2/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include;C:/Users/svita/AppData/Local/Temp/VMBuilds/proRelatka/esp8266_d1_mini/Release/core;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu;C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../final_teplomer;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/ESP8266WiFi/src;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker;C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/avr;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/libb64;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/spiffs;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/d1_mini;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include;{build.path}/core;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/lib/gcc/xtensa-lx106-elf/4.8.2/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include;C:/Users/svita/AppData/Local/Temp/VMBuilds/proRelatka/esp8266_d1_mini/Release/core;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu;C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src;</VMSETTING_IncludePaths>
+    <VisualMicroSettings>
+      <VisualMicroSettings xmlns="">
+        <arduino.upload.port>COM11 </arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -191,6 +196,7 @@
     <ListValues>
       <Value>__ESP8266_ESp8266__</Value>
       <Value>__ESP8266_ESP8266__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=80000000L</Value>
@@ -215,7 +221,7 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7</Value>
-      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src</Value>
+      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries</Value>
@@ -226,9 +232,8 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include</Value>
-      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include</Value>
+      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include</Value>
@@ -243,6 +248,7 @@
     <ListValues>
       <Value>__ESP8266_ESp8266__</Value>
       <Value>__ESP8266_ESP8266__</Value>
+      <Value>_VMDEBUG=1</Value>
       <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=80000000L</Value>
@@ -267,7 +273,7 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7</Value>
-      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src</Value>
+      <Value>C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src</Value>
       <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries</Value>
@@ -278,9 +284,8 @@
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include</Value>
-      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include</Value>
+      <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf</Value>
       <Value>C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include</Value>
@@ -315,7 +320,12 @@
   <armgcccpp.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcccpp.preprocessingassembler.debugging.DebugLevel>
 </ArmGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../final_teplomer;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/ESP8266WiFi/src;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker;C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/avr;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/libb64;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/spiffs;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/d1_mini;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include;{build.path}/core;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/lib/gcc/xtensa-lx106-elf/4.8.2/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include;C:/Users/svita/AppData/Local/Temp/VMBuilds/proRelatka/esp8266_d1_mini/Release/core;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu;C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../final_teplomer;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/ESP8266WiFi/src;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/EEPROM;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries/Ticker;C:/Users/svita/Documents/Arduino/libraries/DHT_sensor_library-1.3.7;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/libraries;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/avr;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/libb64;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/spiffs;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/cores/esp8266/umm_malloc;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/d1_mini;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/libc/xtensa-lx106-elf/include;{build.path}/core;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include/c++/4.8.2/xtensa-lx106-elf;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/xtensa-lx106-elf/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/tools/xtensa-lx106-elf-gcc/2.5.0-3-20ed2b9/lib/gcc/xtensa-lx106-elf/4.8.2/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/tools/sdk/lwip2/include;C:/Users/svita/AppData/Local/Temp/VMBuilds/proRelatka/esp8266_d1_mini/Release/core;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/EEPROM/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Users/svita/AppData/Local/arduino15/packages/esp8266/hardware/esp8266/2.5.2/variants/nodemcu;C:/Users/svita/AppData/Local/Temp/VMBuilds/final_teplomer/esp8266_d1_mini/Release/core;C:/Users/svita/Documents/Arduino/libraries/MySQL_Connector_Arduino-master/src;</VMSETTING_IncludePaths>
+    <VisualMicroSettings>
+      <VisualMicroSettings xmlns="">
+        <arduino.upload.port>COM11 </arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
     <None Include="final_teplomer.ino">

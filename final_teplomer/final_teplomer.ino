@@ -249,8 +249,17 @@ void praceSklienty() {
 }
 void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
   char array[15];
-  float cislo = 5;
-  if (strcmp(pole, "t") == 0) {
+  if (strstr(pole, "t:v") ) {
+	  Serial.print("vlhkost: ");
+	  Serial.println(v);
+	  Serial.print("toplotka: ");
+	  Serial.println(t);
+	  sprintf(array, "%1.2f:%1.2f \n", t,v);
+	  clients[kteryKokot]->write(array);
+	  Serial.println(array);
+	  coPoMeKdoChce[kteryKokot]=3;
+  }
+  else if (strstr(pole, "t") ) {
     Serial.print("toplotka: ");
     Serial.println(t);
     sprintf(array, "%1.2f \n", t);
@@ -258,7 +267,7 @@ void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
     Serial.println(array);
 	coPoMeKdoChce[kteryKokot]=1;
   }
-  if (strcmp(pole, "v") == 0) {
+  else if (strstr(pole, "v") ) {
     Serial.print("vlhkost: ");
     Serial.println(v);
     sprintf(array, "%1.2f \n", v);
@@ -266,16 +275,7 @@ void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot) {
     Serial.println(array);
 	coPoMeKdoChce[kteryKokot]=2;
   }
-  if (strcmp(pole, "t:v") == 0) {
-    Serial.print("vlhkost: ");
-    Serial.println(v);
-    Serial.print("toplotka: ");
-    Serial.println(t);
-    sprintf(array, "%1.2f:%1.2f \n", t,v);
-    clients[kteryKokot]->write(array);
-    Serial.println(array);
-	coPoMeKdoChce[kteryKokot]=3;
-  }
+  
 }
 //**********************************************************************************************************************************
 //prvni kofigurace pro pripojeni
