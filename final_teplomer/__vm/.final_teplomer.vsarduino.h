@@ -32,7 +32,6 @@
 //
 void uloz();
 void zalozTabulku();
-void tohleNecekali();
 void zmenaRvi();
 void praceSklienty();
 void zpracujPozadavek(char pole[mixim_delka_lajny], byte kteryKokot);

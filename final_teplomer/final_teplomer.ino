@@ -27,8 +27,6 @@ const char* udaje[pocetUdaju];
 char blaznivyNapad [pocetUdaju][32];
 byte stavKomunikace = 0;
 byte velikostEpromky = 206;//32 jmeno zarizeni 32 jmeno wifi 32 heslo wifi + 3 pokazde velikost pred obsahem promene  plus novinka 32 jmeno db 32 jmeno 32 heslo +4 ip serveru + 4 na port takze celk velikost 6*33 +4+4
-char necekanaZprava[2][15]={"Horko!!!","Topím se!!"};
-byte necekane=0;
 
 WiFiClient nakladac;
 MySQL_Connection conn((Client *)&nakladac);
@@ -71,11 +69,12 @@ void setup() {
 void loop() {
   praceSklienty();
   if (millis() - cas >= 300000) {
+	  cas = millis();
     Serial.println("jsem tady");
-    uloz();
-    cas = millis();
+    uloz();    
   }
   if(millis()-casmereni>=5000){
+	  casmereni=millis();
 	  float t1,v1;
 	   v1 = dht.readHumidity();
 	   t1 = dht.readTemperature();
@@ -90,14 +89,7 @@ void loop() {
 			   v=v1;
 			   zmenaRvi();
 		   }
-		   if(t>50)necekane=1;
-		   if(v>98)necekane=2;
-	   }
-		   
-		   
-  }
-  if(necekane){
-    tohleNecekali();
+	   }		   
   }
   if(oscanuj){
     oscanuj=0;
@@ -111,24 +103,23 @@ void loop() {
 void uloz() {
   Serial.println("Connecting...");
   if (conn.connect(server_addr, port, blaznivyNapad [PjmenoDB], blaznivyNapad [PhesloDB])) {
-    delay(1000);
     char query[255];
     // zprava co odešlu
     MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
     // nactu hodnoty
-    v = dht.readHumidity();
-    t = dht.readTemperature();
-    if( isnan(v) || isnan(t) )
+    float v1 = dht.readHumidity();
+    float t1 = dht.readTemperature();
+    if( isnan(v1) || isnan(t1) )
     {
       // Don't do anything, if data is invalid
       Serial.println("DHT11 data in invalid");
     }
     else
     {
-      if(t>50)necekane=1;
-      if(v>98)necekane=2;
+		v=v1;
+		t=t1;
       sprintf(query, INSERT_DATA,  blaznivyNapad [jmenoDB],blaznivyNapad[jmeno],"test sensor", v, t);
-      Serial.println(query);
+      //Serial.println(query);
       // zapise do db
       cur_mem->execute(query);
       delete cur_mem;
@@ -144,13 +135,12 @@ void zalozTabulku() {
 
   Serial.println("Connecting...");
   if (conn.connect(server_addr, port, blaznivyNapad [PjmenoDB], blaznivyNapad [PhesloDB])) {
-    delay(1000);
     char query[360];
     // zprava co odešlu
     MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);
     // nactu hodnoty
     sprintf(query, zaloz, blaznivyNapad [jmenoDB], blaznivyNapad[jmeno]);
-    Serial.println(query);
+    //Serial.println(query);
     // zapise do db
     cur_mem->execute(query);
     delete cur_mem;
@@ -165,23 +155,6 @@ void zalozTabulku() {
 //**********************************************************************************************************************************
 //necekane oznameni
 //**********************************************************************************************************************************
-void tohleNecekali(){
-  switch(necekane){
-    case 1:{
-      for(int i=0;i<pocetKlientu;i++){
-        clients[i]->write(necekanaZprava[necekane]);
-    }
-      break;
-    }
-    case 2:{
-      for(int i=0;i<pocetKlientu;i++){
-        clients[i]->write(necekanaZprava[necekane]);
-    }
-      break;
-    }
-  }
-  necekane=0;
-}
 void zmenaRvi(){
 	char teplotnik[8];
 	sprintf(teplotnik, "%1.2f\n", t);
