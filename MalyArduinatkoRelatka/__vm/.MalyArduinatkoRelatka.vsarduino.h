@@ -10,16 +10,17 @@
 
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define ARDUINO 10900
+#define ARDUINO 108010
 #define ARDUINO_MAIN
 #define F_CPU 16000000L
 #define __AVR__
 #define F_CPU 16000000L
-#define ARDUINO 10900
+#define ARDUINO 108010
 #define ARDUINO_AVR_NANO
 #define ARDUINO_ARCH_AVR
 void nastavRka();
 //
+byte hodMiRelatkaDoCisla();
 //
 void prevedNaPiny(byte cislo);
 void provokace(char pole[], byte n);

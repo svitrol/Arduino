@@ -27,15 +27,15 @@
     <BootSegment>0</BootSegment>
     <AsfFrameworkConfig>
       <framework-data>
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.39.0" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.39.0" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <preserveEEPROM>true</preserveEEPROM>
     <ResetRule>0</ResetRule>
@@ -55,7 +55,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>ARDUINO=10900</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
@@ -66,17 +66,16 @@
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../MalyArduinatkoRelatka</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -91,7 +90,7 @@
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>ARDUINO=10900</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
@@ -102,17 +101,16 @@
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../MalyArduinatkoRelatka</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -123,10 +121,10 @@
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../MalyArduinatkoRelatka;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../MalyArduinatkoRelatka;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.upload.port>COM7 </arduino.upload.port>
+        <arduino.upload.port>COM3 </arduino.upload.port>
         <arduino.board.name>nano_atmega328</arduino.board.name>
         <arduino.board.desc>ATmega328P (Arduino Nano)</arduino.board.desc>
         <arduino.board.property_bag>name=ATmega328P (Arduino Nano)
@@ -510,7 +508,7 @@ vmresolved.tools.path=C:\Users\svita\AppData\Local\Temp\Rar$EXa14644.35313\ardui
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>ARDUINO=10900</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
@@ -521,17 +519,16 @@ vmresolved.tools.path=C:\Users\svita\AppData\Local\Temp\Rar$EXa14644.35313\ardui
   <avrgcc.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../MalyArduinatkoRelatka</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcc.compiler.directories.IncludePaths>
   <avrgcc.compiler.optimization.level>Optimize (-O1)</avrgcc.compiler.optimization.level>
@@ -546,7 +543,7 @@ vmresolved.tools.path=C:\Users\svita\AppData\Local\Temp\Rar$EXa14644.35313\ardui
     <ListValues>
       <Value>__AVR_ATmega328p__</Value>
       <Value>__AVR_ATmega328P__</Value>
-      <Value>ARDUINO=10900</Value>
+      <Value>ARDUINO=108010</Value>
       <Value>ARDUINO_MAIN</Value>
       <Value>F_CPU=16000000L</Value>
       <Value>__AVR__</Value>
@@ -557,17 +554,16 @@ vmresolved.tools.path=C:\Users\svita\AppData\Local\Temp\Rar$EXa14644.35313\ardui
   <avrgcccpp.compiler.directories.IncludePaths>
     <ListValues>
       <Value>../../../MalyArduinatkoRelatka</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src</Value>
+      <Value>C:/Program Files (x86)/Arduino/libraries</Value>
       <Value>C:/Users/svita/Documents/Arduino/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
-      <Value>C:/Users/svita/AppData/Local/Temp/Rar%24EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include</Value>
+      <Value>C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include</Value>
     </ListValues>
   </avrgcccpp.compiler.directories.IncludePaths>
   <avrgcccpp.compiler.optimization.level>Optimize (-O1)</avrgcccpp.compiler.optimization.level>
@@ -578,10 +574,10 @@ vmresolved.tools.path=C:\Users\svita\AppData\Local\Temp\Rar$EXa14644.35313\ardui
   <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
 </AvrGccCpp>
     </ToolchainSettings>
-    <VMSETTING_IncludePaths>../../../MalyArduinatkoRelatka;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
+    <VMSETTING_IncludePaths>../../../MalyArduinatkoRelatka;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/libraries;C:/Users/svita/Documents/Arduino/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/libraries;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/cores/arduino;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/arduino/avr/variants/eightanaloginputs;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/avr/include/avr;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.8.1/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Users/svita/AppData/Local/Temp/Rar$EXa14644.35313/arduino-nightly/hardware/tools/avr/lib/gcc/avr/4.9.3/include;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries/SoftwareSerial/src;C:/Program Files (x86)/Arduino/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/libraries;C:/Program Files (x86)/Arduino/hardware/arduino/avr/cores/arduino;C:/Program Files (x86)/Arduino/hardware/arduino/avr/variants/eightanaloginputs;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include/avr;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.2/include;C:/Program Files (x86)/Arduino/hardware/tools/avr/lib/gcc/avr/4.9.3/include;</VMSETTING_IncludePaths>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.upload.port>COM7 </arduino.upload.port>
+        <arduino.upload.port>COM3 </arduino.upload.port>
         <arduino.board.name>nano_atmega328</arduino.board.name>
         <arduino.board.desc>ATmega328P (Arduino Nano)</arduino.board.desc>
         <arduino.board.property_bag>name=ATmega328P (Arduino Nano)
