@@ -445,18 +445,19 @@ cas preberSiCasaky(char* cisloProPrevod) {
       }
     }
     if (pocet == 3) {
-      vysledek.sekundy = atoi(poleslav[0]);
+		vysledek = cas(atoi(poleslav[0]), atoi(poleslav[1]), atoi(poleslav[2]));
+     /* vysledek.sekundy = atoi(poleslav[0]);
       vysledek.minuty = atoi(poleslav[1]);
-      vysledek.hodiny = atoi(poleslav[2]);
+      vysledek.hodiny = atoi(poleslav[2]);*/
     }
     else {
-
-      vysledek.sekundy = atoi(poleslav[0]);
+		vysledek = cas(atoi(poleslav[0]), atoi(poleslav[1]), atoi(poleslav[2]), atoi(poleslav[3]), atoi(poleslav[4]), atoi(poleslav[5]));
+      /*vysledek.sekundy = atoi(poleslav[0]);
       vysledek.minuty = atoi(poleslav[1]);
       vysledek.hodiny = atoi(poleslav[2]);
       vysledek.dny = atoi(poleslav[3]);
       vysledek.mesice = atoi(poleslav[4]);
-      vysledek.roky = atoi(poleslav[5]);
+      vysledek.roky = atoi(poleslav[5]);*/
     }
   }
   else {

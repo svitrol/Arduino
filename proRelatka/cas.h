@@ -4,7 +4,6 @@ class cas {
 	public:
 	int8_t sekundy, minuty, hodiny, dny, mesice;
 	int16_t roky;
-	int8_t * polak[5]{ &sekundy, &minuty, &hodiny, &dny, &mesice };
 	cas() {
 		sekundy = 0;
 		minuty = 0;
@@ -71,6 +70,25 @@ class cas {
 			return false;
 		}
 	}
+	uint8_t dostanHodnotu(uint8_t index) {
+		switch (index)
+		{
+			case 0: {
+				return sekundy;
+			}
+			case 1: {
+				return minuty;
+			}
+			case 2: {
+				return hodiny;
+			}
+			case 3: {
+				return dny;
+			}
+		}
+		return mesice;
+	}
+	
 	bool operator < (cas dalsi) {
 		if (dny != 0 && dalsi.dny != 0) {
 			if (roky < dalsi.roky) {
@@ -79,11 +97,11 @@ class cas {
 			else {
 				if (roky == dalsi.roky) {
 					for (int8_t i = 4; i >= 0; i--) {
-						if (polak[i] < dalsi.polak[i]) {
+						if (dostanHodnotu(i) < dalsi.dostanHodnotu(i)) {
 							return true;
 						}
 						else {
-							if (polak[i] == dalsi.polak[i]) {
+							if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 								continue;
 							}
 							return false;
@@ -96,11 +114,11 @@ class cas {
 		else
 		{
 			for (int8_t i = 2; i >= 0; i--) {
-				if (polak[i] < dalsi.polak[i]) {
+				if (dostanHodnotu(i) < dalsi.dostanHodnotu(i)) {
 					return true;
 				}
 				else {
-					if (polak[i] == dalsi.polak[i]) {
+					if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 						continue;
 					}
 					return false;
@@ -117,11 +135,11 @@ class cas {
 			else {
 				if (roky == dalsi.roky) {
 					for (int8_t i = 4; i >= 0; i--) {
-						if (polak[i] <= dalsi.polak[i]) {
+						if (dostanHodnotu(i) <= dalsi.dostanHodnotu(i)) {
 							return true;
 						}
 						else {
-							if (polak[i] == dalsi.polak[i]) {
+							if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 								continue;
 							}
 							return false;
@@ -134,11 +152,11 @@ class cas {
 		else
 		{
 			for (int8_t i = 2; i >= 0; i--) {
-				if (polak[i] <= dalsi.polak[i]) {
+				if (dostanHodnotu(i) <= dalsi.dostanHodnotu(i)) {
 					return true;
 				}
 				else {
-					if (polak[i] == dalsi.polak[i]) {
+					if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 						continue;
 					}
 					return false;
@@ -155,11 +173,11 @@ class cas {
 			else {
 				if (roky == dalsi.roky) {
 					for (int8_t i = 4; i >= 0; i--) {
-						if (polak[i] > dalsi.polak[i]) {
+						if (dostanHodnotu(i) > dalsi.dostanHodnotu(i)) {
 							return true;
 						}
 						else {
-							if (polak[i] == dalsi.polak[i]) {
+							if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 								continue;
 							}
 							return false;
@@ -172,11 +190,11 @@ class cas {
 		else
 		{
 			for (int8_t i = 2; i >= 0; i--) {
-				if (polak[i] > dalsi.polak[i]) {
+				if (dostanHodnotu(i) > dalsi.dostanHodnotu(i)) {
 					return true;
 				}
 				else {
-					if (polak[i] == dalsi.polak[i]) {
+					if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 						continue;
 					}
 					return false;
@@ -193,11 +211,11 @@ class cas {
 			else {
 				if (roky == dalsi.roky) {
 					for (int8_t i = 4; i >= 0; i--) {
-						if (polak[i] >= dalsi.polak[i]) {
+						if (dostanHodnotu(i) >= dalsi.dostanHodnotu(i)) {
 							return true;
 						}
 						else {
-							if (polak[i] == dalsi.polak[i]) {
+							if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 								continue;
 							}
 							return false;
@@ -210,11 +228,11 @@ class cas {
 		else
 		{
 			for (int8_t i = 2; i >= 0; i--) {
-				if (polak[i] >= dalsi.polak[i]) {
+				if (dostanHodnotu(i) >= dalsi.dostanHodnotu(i)) {
 					return true;
 				}
 				else {
-					if (polak[i] == dalsi.polak[i]) {
+					if (dostanHodnotu(i) == dalsi.dostanHodnotu(i)) {
 						continue;
 					}
 					return false;
